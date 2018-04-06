@@ -19,7 +19,7 @@ class QUAD:
         self.action_dim = 2
         self.a_bound = np.array([[0.05, 1], [-1, 1]])
         self.rangeE_old = 10000
-        self.c1 = 10
+        self.c1 = 100
         self.c2 = 0
         self.c3 = 0
 

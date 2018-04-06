@@ -12,7 +12,7 @@ def display(A3C, display_flag):
         time_profile = np.empty(0)
         action_profile = np.empty((0, 2))
         ep_reward = 0
-        for _ in range(10000):
+        for step in range(10000):
             action, sigma = A3C.GLOBAL_AC.choose_best(observation)
             observation_, reward, done, info = A3C.para.env.step(action)
             ob_profile = np.vstack((ob_profile, observation))
@@ -22,8 +22,9 @@ def display(A3C, display_flag):
             print('action', action, 'state', A3C.para.env.state)
             observation = observation_
             if done:
+                print('step', step, 'reward', ep_reward)
                 break
-        print(ep_reward)
+        # print(ep_reward)
 
         plt.figure(2)
         plt.plot(ob_profile[:, 0], ob_profile[:, 1])
