@@ -172,20 +172,20 @@ class ACNet(object):
         with tf.variable_scope('actor'):
             l_a1 = tf.layers.dense(self.s, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la1')
             l_a2 = tf.layers.dense(l_a1, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la2')
-            # l_a3 = tf.layers.dense(l_a2, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la3')
-            # l_a = tf.layers.dense(l_a3, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la')
+            l_a3 = tf.layers.dense(l_a2, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la3')
+            l_a = tf.layers.dense(l_a3, self.para.units_a, tf.nn.relu6, kernel_initializer=w_init, name='la')
 
-            mu = tf.layers.dense(l_a2, self.para.N_A, tf.nn.tanh, kernel_initializer=w_init, name='mu')
+            mu = tf.layers.dense(l_a, self.para.N_A, tf.nn.tanh, kernel_initializer=w_init, name='mu')
             # sigma_1 = tf.layers.dense(l_a1, self.para.N_A, tf.sigmoid, kernel_initializer=w_init, name='sigma')
-            sigma_1 = tf.layers.dense(l_a2, self.para.N_A, tf.nn.softplus, kernel_initializer=w_init, name='sigma')
+            sigma_1 = tf.layers.dense(l_a, self.para.N_A, tf.nn.softplus, kernel_initializer=w_init, name='sigma')
             sigma = tf.multiply(sigma_1, self.para.sigma_mul, name='scaled_a')
 
         with tf.variable_scope('critic'):
             l_c1 = tf.layers.dense(self.s, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc1')
             l_c2 = tf.layers.dense(l_c1, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc2')
-            # l_c3 = tf.layers.dense(l_c2, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc3')
-            # l_c = tf.layers.dense(l_c3, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc')
-            v = tf.layers.dense(l_c2, 1, kernel_initializer=w_init, name='v')  # state value
+            l_c3 = tf.layers.dense(l_c2, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc3')
+            l_c = tf.layers.dense(l_c3, self.para.units_c, tf.nn.relu6, kernel_initializer=w_init, name='lc')
+            v = tf.layers.dense(l_c, 1, kernel_initializer=w_init, name='v')  # state value
         a_params = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=scope + '/actor')
         c_params = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=scope + '/critic')
 
