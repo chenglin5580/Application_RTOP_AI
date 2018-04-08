@@ -16,7 +16,7 @@ para = A3C.Para(env,  # 环境参数包括state_dim,action_dim,abound,step,reset
                 ENTROPY_BETA=0.01,  # 表征探索大小的量，越大结果越不确定
                 LR_A=0.00001,  # Actor的学习率
                 LR_C=0.001,  # Crtic的学习率
-                sigma_mul=0.3,
+                sigma_mul=0.5,
                 MAX_EP_STEP=60000,  # 控制一个回合的最长长度
                 train=train_flag  # 表示训练
                 )

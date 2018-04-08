@@ -62,7 +62,7 @@ class QUAD:
 
             # reward 计算
             reward += - self.delta_t
-            if 5 > rangeE_next >= self.rangeE_now or self.t > 5:
+            if 1 > rangeE_next >= self.rangeE_now or self.t > 5:
                 done = True
                 rangeE_now = np.sqrt((x - self.constant['x_f']) ** 2 + (z - self.constant['z_f']) ** 2)
                 vE_now = np.sqrt((vx - self.constant['vx_f']) ** 2 + (vz - self.constant['vz_f']) ** 2)
@@ -82,7 +82,7 @@ class QUAD:
 
         # return
         # print(reward)
-        return state_next.copy(), reward, done, []
+        return state_next.copy(), reward/10, done, []
 
 
 if __name__ == '__main__':
