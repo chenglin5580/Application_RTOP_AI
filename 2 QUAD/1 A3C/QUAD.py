@@ -13,14 +13,14 @@ class QUAD:
         self.constant = {'g': -9.81, 'c1': 20., 'c2': 2., 'alpha': 0., 'm': 1.,
                          'gamma1': 1, 'gamma2': 1.0,
                          'x_f': 5., 'z_f': 5., 'vx_f': 0., 'vz_f': 0., 'theta_f': 0.}
-        self.delta_t = 0.001  # 仿真步长，未归一化，单位天
+        self.delta_t = 0.003  # 仿真步长，未归一化，单位天
         observation = self.reset()
         self.ob_dim = len(observation)
         self.action_dim = 2
         self.a_bound = np.array([[0.05, 1], [-1, 1]])
         self.rangeE_now = 10000
         self.c1 = 10
-        self.c2 = 1
+        self.c2 = 0
         self.c3 = 0
 
 
@@ -29,7 +29,7 @@ class QUAD:
 
     def reset(self):
         self.t = 0
-        self.delta_t = 0.001  # 仿真步长，未归一化，单位天
+        self.rangeE_now = 10000
         if self.random == True:
             pass
         else:
@@ -45,7 +45,7 @@ class QUAD:
 
         # 微分方程
         reward = 0
-        for step in range(10):
+        for step in range(3):
             x, z, vx, vz, theta = self.state
             x_dot = vx
             z_dot = vz
