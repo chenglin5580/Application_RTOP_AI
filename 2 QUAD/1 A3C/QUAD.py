@@ -20,7 +20,7 @@ class QUAD:
         self.a_bound = np.array([[0.05, 1], [-1, 1]])
         self.rangeE_now = 10000
         self.c1 = 10
-        self.c2 = 0
+        self.c2 = 1
         self.c3 = 0
 
 
@@ -82,7 +82,7 @@ class QUAD:
 
         # return
         # print(reward)
-        return state_next.copy(), reward/10, done, []
+        return state_next.copy(), reward, done, []
 
 
 if __name__ == '__main__':
